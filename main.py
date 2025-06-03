@@ -9,3 +9,7 @@ Cours MGA802, Session Été 2025
 
 #PROGRAMME PRINCIPAL
 
+import fonctions
+import fonctions_numpy
+
+
