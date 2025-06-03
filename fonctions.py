@@ -16,8 +16,8 @@ borne_sup = 25
 def python_trapeze (list_coef,borne_inf,borne_sup,n):
     pas = (borne_sup-borne_inf)/n
     surface = 0
-    for i in range(borne_inf,borne_sup+1,n):
-        T = ((i+pas)-i)*(f(list_coef,i)+f(list_coef,i+pas))
+    for i in range(borne_inf,pas):
+        T = (pas)*((f(list_coef,i)+f(list_coef,i+pas))/2)
         surface += T
     print(surface)
     return surface
@@ -27,5 +27,5 @@ def python_trapeze (list_coef,borne_inf,borne_sup,n):
 
 
 
-python_trapeze([1,2,3,4],-10,10,20)
+python_trapeze([1,2,3,4],-10,10,30)
 
