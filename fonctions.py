@@ -23,14 +23,7 @@ def python_trapeze (list_coef,borne_inf,borne_sup,n):
     return surface
 
 
-def python_trapeze2 (list_coef,a,b,n):
-    pas = (borne_sup-borne_inf)/n
-    surface = 0
-    for i in range(a,b,n):
-        T = ((i+pas)-i)
-        surface += T
-    print(surface)
-    return surface
+
 
 
 
