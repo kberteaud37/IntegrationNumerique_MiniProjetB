@@ -19,4 +19,3 @@ def simpson(list_coef,borne_inf,borne_sup,n):
 
 
 
-
