@@ -1,40 +1,46 @@
 import matplotlib.pyplot as plt
 
-def integration_rectangle () :
-    p1 = float(input('veuillez entrer la constante p1 : '))
-    p2 = float(input('veuillez entrer la constante p2 : '))
-    p3 = float(input('veuillez entrer la constante p3 : '))
-    p4 = float(input('veuillez entrer la constante p4 : '))
+def integration_rectangle():
+    p1 = float(input('Veuillez entrer la constante p1 : '))
+    p2 = float(input('Veuillez entrer la constante p2 : '))
+    p3 = float(input('Veuillez entrer la constante p3 : '))
+    p4 = float(input('Veuillez entrer la constante p4 : '))
 
     air = 0
 
-    n = 1
-    for i in range (-10,11,n):
-        equation = ((p1) +
-                    (p2) *(i) +
-                    (p3) * (i)**2 +
-                    (p4)  *(i)**3)
+    n = 1000  # nombre de rectangles
 
+    borne_sup = float(input('Donnez la borne supérieure : '))
+    borne_inf = float(input('Donnez la borne inférieure : '))
 
-        plt.plot([i-(n/2), i+(n/2)], [equation, equation], color='red', linewidth=2, label='Mon segment')
-        plt.plot([i-(n/2), i-(n/2)], [equation, 0], color='red', linewidth=2, label='Mon segment')
-        plt.plot([i+(n/2), i+(n/2)], [equation, 0], color='red', linewidth=2, label='Mon segment')
+    largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
 
-        air += (n * (equation))
+    x_vals = []
+    y_vals = []
 
-        plt.plot(i, equation, marker='o', linestyle='-')
+    for i in range(n+1):
+        x = borne_inf + i * largeur
+        y = p1 + p2 * x + p3 * x**2 + p4 * x**3
 
-    print(air)
+        # Tracer le rectangle
+        plt.plot([x - (largeur/2), x + (largeur/2)], [y, y], color='red')
+        plt.plot([x - (largeur/2) , x - (largeur/2)], [0, y], color='red')
+        plt.plot([x + (largeur/2), x + (largeur/2)], [0, y], color='red')
 
-    plt.title("Tracé de l'équation polynomiale")
-    plt.xlabel("i")
-    plt.ylabel("Valeur de l'équation")
+        air += largeur * y
+
+        x_vals.append(x)
+        y_vals.append(y)
+
+    print(f"Aire approximée sous la courbe : {air}")
+
+    # Tracé de la courbe aussi si tu veux
+    plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='blue', label='Courbe')
+    plt.title("Tracé de l'équation polynomiale avec intégration par rectangles")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
     plt.grid(True)
+    plt.legend()
     plt.show()
 
-
 integration_rectangle()
-
-
-# Tracer le segment
-
