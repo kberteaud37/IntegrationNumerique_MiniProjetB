@@ -17,7 +17,5 @@ def simpson(list_coef,borne_inf,borne_sup,n):
         a = b
     return A_simpson
 
-print(simpson([2,4,-1,3],-10,10,20))
-
 
 
