@@ -1,31 +1,45 @@
-def f(list_coef,x):
-    y = 0
-    exposant = 0
-    for i in list_coef:
-        y += i*x**exposant
-        exposant += 1
-    return y
-p1 = 3
-p2 = 2
-p3 = 4
-borne_inf = -25
-borne_sup = 25
+def f(list_coef, x):
+    return sum(coef * x**i for i, coef in enumerate(list_coef))
+
+def trapeze(list_coef, borne_inf, borne_sup, n):
+    """
+    Calcule l'intégrale approchée d'un polynôme entre deux bornes
+    en utilisant la méthode des trapèzes.
+    """
+    intervalle = (borne_sup - borne_inf) / n
+    a = borne_inf
+    A_trapeze = 0
+    for _ in range(n):
+        b = a + intervalle
+        A_trapeze += (intervalle) * (f(list_coef, a) + f(list_coef, b)) / 2
+        a = b
+    return A_trapeze
+
+def primitive(list_coef, borne_inf, borne_sup):
+    """
+    Calcule l'intégrale exacte d'un polynôme défini par ses coefficients
+    entre deux bornes, sans utiliser de bibliothèque externe.
+    """
+    aire = 0
+    for i, coef in enumerate(list_coef):
+        expo = i + 1
+        aire += coef * (borne_sup**expo - borne_inf**expo) / expo
+    return aire
+
+# Définition du polynôme : f(x) = 1 + 2x + 3x² + 4x³
+coefficients = [1, 2, 3, 4]
+
+# Intervalle d'intégration
+borne_inf = -10
+borne_sup = 10
 
 
+n = 10
 
-def python_trapeze (list_coef,borne_inf,borne_sup,n):
-    pas = (borne_sup-borne_inf)/n
-    surface = 0
-    for i in range(borne_inf,pas):
-        T = (pas)*((f(list_coef,i)+f(list_coef,i+pas))/2)
-        surface += T
-    print(surface)
-    return surface
+aire_approchee = trapeze(coefficients, borne_inf, borne_sup, n)
+aire_exacte = primitive(coefficients, borne_inf, borne_sup)
 
+print(f"Aire approchée (trapèzes, n={n}) : {aire_approchee:.6f}")
+print(f"Aire exacte (calculée à la main) : {aire_exacte:.6f}")
 
-
-
-
-
-python_trapeze([1,2,3,4],-10,10,30)
 
