@@ -1,14 +1,38 @@
-def f(a,b,c,d,x):
-    return a+b*x+c*x**2+d*x**3
+def f(list_coef,x):
+    y = 0
+    exposant = 0
+    for i in list_coef:
+        y += i*x**exposant
+        exposant += 1
+    return y
 p1 = 3
 p2 = 2
 p3 = 4
-a = -25
-b=25
-n = 100
-pas = abs(a)+abs()
+borne_inf = -25
+borne_sup = 25
 
 
-fonction_polynomiale = p1+p2*x+p3*(x**2)+p4*(x**3)
 
-def python_trapeze (a,b,fonction_polynomiale):
+def python_trapeze (list_coef,borne_inf,borne_sup,n):
+    pas = (borne_sup-borne_inf)/n
+    surface = 0
+    for i in range(borne_inf,borne_sup+1,n):
+        T = ((i+pas)-i)*(f(list_coef,i)+f(list_coef,i+pas))
+        surface += T
+    print(surface)
+    return surface
+
+
+def python_trapeze2 (list_coef,a,b,n):
+    pas = (borne_sup-borne_inf)/n
+    surface = 0
+    for i in range(a,b,n):
+        T = ((i+pas)-i)
+        surface += T
+    print(surface)
+    return surface
+
+
+
+python_trapeze([1,2,3,4],-10,10,20)
+
