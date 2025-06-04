@@ -1,7 +1,16 @@
 import numpy as np
+
 from fonctions import f
 
+def trapeze_numpy(list_coef, borne_inf, borne_sup, n):
+    x = np.linspace(borne_inf, borne_sup, n + 1)
+    y = f(list_coef, x)
 
+    h = (borne_sup - borne_inf) / n
+
+    aire = h * (y[0] + 2 * np.sum(y[1:-1]) + y[-1]) / 2
+    return aire
+  
 def simpson_np(list_coef, borne_inf, borne_sup, n):
     h = (borne_sup - borne_inf) / n
 
@@ -18,4 +27,5 @@ def simpson_np(list_coef, borne_inf, borne_sup, n):
     )
 
     return np.sum(A_vals)
+
 
