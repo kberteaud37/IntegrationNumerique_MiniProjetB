@@ -4,11 +4,11 @@ def integration_rectangle():
     p1 = float(input('Veuillez entrer la constante p1 : '))
     p2 = float(input('Veuillez entrer la constante p2 : '))
     p3 = float(input('Veuillez entrer la constante p3 : '))
-    p4 = float(input('Veuillez entrer la constante p4 : '))
+    p4 = float(input('Veuillez entrer la con`stante p4 : '))
 
     air = 0
 
-    n = 1000  # nombre de rectangles
+    n = 10000  # nombre de rectangles
 
     borne_sup = float(input('Donnez la borne supérieure : '))
     borne_inf = float(input('Donnez la borne inférieure : '))
