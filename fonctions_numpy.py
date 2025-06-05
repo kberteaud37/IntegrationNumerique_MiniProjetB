@@ -1,5 +1,4 @@
 import numpy as np
-
 from fonctions import f
 
 def trapeze_numpy(list_coef, borne_inf, borne_sup, n):

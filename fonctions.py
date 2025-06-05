@@ -44,13 +44,12 @@ def simpson(list_coef,borne_inf,borne_sup,n):
     A_simpson = 0
     for i in range(n):
         b = a+intervalle
-        print(a,b)
         A_simpson += ((b-a)/6)*(f(list_coef,a)+4*f(list_coef,(a+b)/2)+f(list_coef,b))
         a = b
     return A_simpson
 
-def erreur(list_coef,borne_inf,borne_sup,n,fonction):
-    return abs(fonction(list_coef,borne_inf,borne_sup,n)-primitive(list_coef,borne_inf,borne_sup))
+def erreur(list_coef,borne_inf,borne_sup,i,valeur_fonction):
+    return abs(valeur_fonction-primitive(list_coef,borne_inf,borne_sup))
   
 """ # Calculs
 aire_approchee, segments = trapeze(coefficients, borne_inf, borne_sup, n)
