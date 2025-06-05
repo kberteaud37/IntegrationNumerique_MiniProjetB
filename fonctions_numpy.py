@@ -1,8 +1,16 @@
 import numpy as np
 from fonctions import f
 
+def trapeze_numpy(list_coef, borne_inf, borne_sup, n):
+    x = np.linspace(borne_inf, borne_sup, n + 1)
+    y = f(list_coef, x)
 
-def simpson_np(list_coef, borne_inf, borne_sup, n):
+    h = (borne_sup - borne_inf) / n
+
+    aire = h * (y[0] + 2 * np.sum(y[1:-1]) + y[-1]) / 2
+    return aire
+  
+def simpson_numpy(list_coef, borne_inf, borne_sup, n):
     h = (borne_sup - borne_inf) / n
 
     # Points de départ et fin des sous-intervalles
@@ -18,4 +26,18 @@ def simpson_np(list_coef, borne_inf, borne_sup, n):
     )
 
     return np.sum(A_vals)
+
+
+def rectangle_numpy(list_coef, borne_inf, borne_sup, n):
+
+    air = 0
+
+    largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
+
+    x_milieux = np.linspace(borne_inf + largeur / 2, borne_sup - largeur / 2, n)
+    y_milieux = np.polyval(list_coef[::-1], x_milieux)
+
+    air = np.sum(y_milieux * largeur)
+
+    return air
 
