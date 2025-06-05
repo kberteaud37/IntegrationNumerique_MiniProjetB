@@ -1,6 +1,45 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
+
+def integration_rectangle(list_coef,borne_inf,borne_sup):
+
+    air = 0
+    n = 100  # nombre de rectangles
+
+    largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
+
+    x_vals = []
+    y_vals = []
+    
+    for i in range(n+1):
+        x = borne_inf + i * largeur
+        y = list_coef[0] + list_coef[1] * x + list_coef[2] * x**2 + list_coef[3] * x**3
+
+        # Tracer le rectangle
+        # plt.plot([x - (largeur/2), x + (largeur/2)], [y, y], color='red')
+        # plt.plot([x - (largeur/2) , x - (largeur/2)], [0, y], color='red')
+        # plt.plot([x + (largeur/2), x + (largeur/2)], [0, y], color='red')
+
+        air += largeur * y
+
+        x_vals.append(x)
+        y_vals.append(y)
+
+    print(f"Aire approximée sous la courbe  : {air}")
+
+
+
+    # Tracé de la courbe aussi si tu veux
+    # plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='blue', label='Courbe')
+    # plt.title("Tracé de l'équation polynomiale avec intégration par rectangles")
+    # plt.xlabel("x")
+    # plt.ylabel("f(x)")
+    # plt.grid(True)
+    # plt.legend()
+    # plt.show()
+
+    return air
+
 
 def f(list_coef,x):
     y = 0
@@ -10,6 +49,8 @@ def f(list_coef,x):
         exposant += 1
     return y
 
+
+   
 def primitive(list_coef,borne_inf,borne_sup):
     F_a = 0
     F_b = 0

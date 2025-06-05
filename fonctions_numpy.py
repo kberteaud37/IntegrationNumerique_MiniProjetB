@@ -28,3 +28,17 @@ def simpson_np(list_coef, borne_inf, borne_sup, n):
     return np.sum(A_vals)
 
 
+def integration_rectangle_numpy(list_coef, borne_inf, borne_sup, n):
+
+    air = 0
+
+    largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
+
+    x_milieux = np.linspace(borne_inf + largeur / 2, borne_sup - largeur / 2, n)
+    y_milieux = np.polyval(list_coef[::-1], x_milieux)
+
+    air = np.sum(y_milieux * largeur)
+
+    print(f"Aire approximée sous la courbe : {air:.5f}")
+    return air
+
