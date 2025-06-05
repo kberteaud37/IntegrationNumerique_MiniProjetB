@@ -9,9 +9,11 @@ Cours MGA802, Session Été 2025
 
 #PROGRAMME PRINCIPAL
 
-import fonctions
+from fonctions import *
 import fonctions_numpy
 import matplotlib.pyplot as plt
+
+from fonctions_numpy import integration_rectangle_numpy
 
 print("Entrez les coefficients de la fonction f(x)")
 liste = []
@@ -25,4 +27,5 @@ while borne_inf>=borne_sup:
     borne_inf = int(input("Entrez la borne inférieure : "))
     borne_sup = int(input("Entrez la borne supérieure : "))
 
-for i in range(100):
+
+print(integration_rectangle_numpy(liste,borne_inf,borne_sup,100))

@@ -1,20 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+def integration_rectangle(list_coef,borne_inf,borne_sup):
 
-
-
-def integration_rectangle():
-    p1 = float(input('Veuillez entrer la constante p1 : '))
-    p2 = float(input('Veuillez entrer la constante p2 : '))
-    p3 = float(input('Veuillez entrer la constante p3 : '))
-    p4 = float(input('Veuillez entrer la con`stante p4 : '))
-    
     air = 0
-    n = 10000  # nombre de rectangles
-
-    borne_sup = float(input('Donnez la borne supérieure : '))
-    borne_inf = float(input('Donnez la borne inférieure : '))
+    n = 100  # nombre de rectangles
 
     largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
 
@@ -23,12 +13,12 @@ def integration_rectangle():
     
     for i in range(n+1):
         x = borne_inf + i * largeur
-        y = p1 + p2 * x + p3 * x**2 + p4 * x**3
+        y = list_coef[0] + list_coef[1] * x + list_coef[2] * x**2 + list_coef[3] * x**3
 
         # Tracer le rectangle
-        plt.plot([x - (largeur/2), x + (largeur/2)], [y, y], color='red')
-        plt.plot([x - (largeur/2) , x - (largeur/2)], [0, y], color='red')
-        plt.plot([x + (largeur/2), x + (largeur/2)], [0, y], color='red')
+        # plt.plot([x - (largeur/2), x + (largeur/2)], [y, y], color='red')
+        # plt.plot([x - (largeur/2) , x - (largeur/2)], [0, y], color='red')
+        # plt.plot([x + (largeur/2), x + (largeur/2)], [0, y], color='red')
 
         air += largeur * y
 
@@ -37,15 +27,20 @@ def integration_rectangle():
 
     print(f"Aire approximée sous la courbe : {air}")
 
+
+
     # Tracé de la courbe aussi si tu veux
-    plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='blue', label='Courbe')
-    plt.title("Tracé de l'équation polynomiale avec intégration par rectangles")
-    plt.xlabel("x")
-    plt.ylabel("f(x)")
-    plt.grid(True)
-    plt.legend()
-    plt.show()
-    
+    # plt.plot(x_vals, y_vals, marker='o', linestyle='-', color='blue', label='Courbe')
+    # plt.title("Tracé de l'équation polynomiale avec intégration par rectangles")
+    # plt.xlabel("x")
+    # plt.ylabel("f(x)")
+    # plt.grid(True)
+    # plt.legend()
+    # plt.show()
+
+    return air
+
+
 def f(list_coef,x):
     y = 0
     exposant = 0
@@ -90,7 +85,6 @@ def simpson(list_coef,borne_inf,borne_sup,n):
     A_simpson = 0
     for i in range(n):
         b = a+intervalle
-        print(a,b)
         A_simpson += ((b-a)/6)*(f(list_coef,a)+4*f(list_coef,(a+b)/2)+f(list_coef,b))
         a = b
     return A_simpson
@@ -125,4 +119,3 @@ plt.legend()
 plt.grid(True)
 plt.show()"""
 
-integration_rectangle()
