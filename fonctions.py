@@ -25,7 +25,7 @@ def integration_rectangle(list_coef,borne_inf,borne_sup):
         x_vals.append(x)
         y_vals.append(y)
 
-    print(f"Aire approximée sous la courbe : {air}")
+    print(f"Aire approximée sous la courbe  : {air}")
 
 
 
