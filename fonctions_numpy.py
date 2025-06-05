@@ -10,7 +10,7 @@ def trapeze_numpy(list_coef, borne_inf, borne_sup, n):
     aire = h * (y[0] + 2 * np.sum(y[1:-1]) + y[-1]) / 2
     return aire
   
-def simpson_np(list_coef, borne_inf, borne_sup, n):
+def simpson_numpy(list_coef, borne_inf, borne_sup, n):
     h = (borne_sup - borne_inf) / n
 
     # Points de départ et fin des sous-intervalles
@@ -28,7 +28,7 @@ def simpson_np(list_coef, borne_inf, borne_sup, n):
     return np.sum(A_vals)
 
 
-def integration_rectangle_numpy(list_coef, borne_inf, borne_sup, n):
+def rectangle_numpy(list_coef, borne_inf, borne_sup, n):
 
     air = 0
 
@@ -39,6 +39,5 @@ def integration_rectangle_numpy(list_coef, borne_inf, borne_sup, n):
 
     air = np.sum(y_milieux * largeur)
 
-    print(f"Aire approximée sous la courbe : {air:.5f}")
     return air
 

@@ -1,10 +1,29 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def integration_rectangle(list_coef,borne_inf,borne_sup):
+
+def f(list_coef, x):
+    y = 0
+    exposant = 0
+    for i in list_coef:
+        y += i * x ** exposant
+        exposant += 1
+    return y
+
+
+def primitive(list_coef, borne_inf, borne_sup):
+    F_a = 0
+    F_b = 0
+    exposant = 1
+    for i in list_coef:
+        F_a += i * (borne_inf ** exposant / exposant)
+        F_b += i * (borne_sup ** exposant / exposant)
+        exposant += 1
+    return F_b - F_a
+
+def rectangle(list_coef,borne_inf,borne_sup,n):
 
     air = 0
-    n = 100  # nombre de rectangles
 
     largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
 
@@ -25,8 +44,6 @@ def integration_rectangle(list_coef,borne_inf,borne_sup):
         x_vals.append(x)
         y_vals.append(y)
 
-    print(f"Aire approximée sous la courbe  : {air}")
-
 
 
     # Tracé de la courbe aussi si tu veux
@@ -39,27 +56,6 @@ def integration_rectangle(list_coef,borne_inf,borne_sup):
     # plt.show()
 
     return air
-
-
-def f(list_coef,x):
-    y = 0
-    exposant = 0
-    for i in list_coef:
-        y += i*x**exposant
-        exposant += 1
-    return y
-
-
-   
-def primitive(list_coef,borne_inf,borne_sup):
-    F_a = 0
-    F_b = 0
-    exposant = 1
-    for i in list_coef:
-        F_a += i*(borne_inf**exposant/exposant)
-        F_b += i*(borne_sup**exposant/exposant)
-        exposant += 1
-    return F_b-F_a
 
 def trapeze(list_coef, borne_inf, borne_sup, n):
     intervalle = (borne_sup - borne_inf) / n
@@ -91,7 +87,19 @@ def simpson(list_coef,borne_inf,borne_sup,n):
 
 def erreur(list_coef,borne_inf,borne_sup,i,valeur_fonction):
     return abs(valeur_fonction-primitive(list_coef,borne_inf,borne_sup))
-  
+
+def get_float_input(prompt):
+    while True:
+        # Constantly check if a value was entered followed by Enter
+        try:
+            # Put the value entered by user in "entree"
+            value = float(input(prompt))
+            break
+        except ValueError:
+            # If input is not a float we get a ValueError
+            print("Invalid input, please try again.")
+    return value
+
 """ # Calculs
 aire_approchee, segments = trapeze(coefficients, borne_inf, borne_sup, n)
 aire_exacte = primitive(coefficients, borne_inf, borne_sup)
