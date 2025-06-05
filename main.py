@@ -42,7 +42,7 @@ for i in range(100,1000):
     nb_segment.append(i)
 
 
-plt.figure(1)
+plt.figure(3)
 plt.plot(nb_segment,erreur_rectangle,'r', label="Rectangle")
 plt.plot(nb_segment,erreur_trapeze,'b',label="Trapeze")
 plt.plot(nb_segment,erreur_simpson,'g',label="Simpson")
@@ -53,7 +53,7 @@ plt.legend()
 plt.title("Convergence l'erreur en fonction du nombre de segment (Python)")
 plt.show()
 
-plt.figure(2)
+plt.figure(4)
 plt.plot(nb_segment,erreur_rectangle_numpy,'r', label="Rectangle")
 plt.plot(nb_segment,erreur_trapeze_numpy,'b',label="Trapeze")
 plt.plot(nb_segment,erreur_simpson_numpy,'g',label="Simpson")
