@@ -83,7 +83,7 @@ def simpson(list_coef,borne_inf,borne_sup,n):
     intervalle = (borne_sup-borne_inf)/n
     a = borne_inf
     A_simpson = 0
-    for i in range(n):
+    for _ in range(n):
         b = a+intervalle
         A_simpson += ((b-a)/6)*(f(list_coef,a)+4*f(list_coef,(a+b)/2)+f(list_coef,b))
         a = b
