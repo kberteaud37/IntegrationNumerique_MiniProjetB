@@ -2,26 +2,26 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def f(list_coef, x):
+def f(liste_coef, x):
     y = 0
     exposant = 0
-    for i in list_coef:
+    for i in liste_coef:
         y += i * x ** exposant
         exposant += 1
     return y
 
 
-def primitive(list_coef, borne_inf, borne_sup):
+def primitive(liste_coef, borne_inf, borne_sup):
     F_a = 0
     F_b = 0
     exposant = 1
-    for i in list_coef:
+    for i in liste_coef:
         F_a += i * (borne_inf ** exposant / exposant)
         F_b += i * (borne_sup ** exposant / exposant)
         exposant += 1
     return F_b - F_a
 
-def rectangle(list_coef,borne_inf,borne_sup,n):
+def rectangle(liste_coef,borne_inf,borne_sup,n):
 
     air = 0
 
@@ -32,7 +32,7 @@ def rectangle(list_coef,borne_inf,borne_sup,n):
     
     for i in range(n+1):
         x = borne_inf + i * largeur
-        y = list_coef[0] + list_coef[1] * x + list_coef[2] * x**2 + list_coef[3] * x**3
+        y = liste_coef[0] + liste_coef[1] * x + liste_coef[2] * x**2 + liste_coef[3] * x**3
 
         # Tracer le rectangle
         # plt.plot([x - (largeur/2), x + (largeur/2)], [y, y], color='red')
@@ -57,7 +57,7 @@ def rectangle(list_coef,borne_inf,borne_sup,n):
 
     return air
 
-def trapeze(list_coef, borne_inf, borne_sup, n):
+def trapeze(liste_coef, borne_inf, borne_sup, n):
     intervalle = (borne_sup - borne_inf) / n
     a = borne_inf
     A_trapeze = 0
@@ -65,8 +65,8 @@ def trapeze(list_coef, borne_inf, borne_sup, n):
 
     for _ in range(n):
         b = a + intervalle
-        fa = f(list_coef, a)
-        fb = f(list_coef, b)
+        fa = f(liste_coef, a)
+        fb = f(liste_coef, b)
         A_trapeze += (intervalle) * (fa + fb) / 2
 
         # On stocke les points nécessaires pour tracer les segments
@@ -75,18 +75,18 @@ def trapeze(list_coef, borne_inf, borne_sup, n):
 
     return A_trapeze
   
-def simpson(list_coef,borne_inf,borne_sup,n):
+def simpson(liste_coef,borne_inf,borne_sup,n):
     intervalle = (borne_sup-borne_inf)/n
     a = borne_inf
     A_simpson = 0
     for _ in range(n):
         b = a+intervalle
-        A_simpson += ((b-a)/6)*(f(list_coef,a)+4*f(list_coef,(a+b)/2)+f(list_coef,b))
+        A_simpson += ((b-a)/6)*(f(liste_coef,a)+4*f(liste_coef,(a+b)/2)+f(liste_coef,b))
         a = b
     return A_simpson
 
-def erreur(list_coef,borne_inf,borne_sup,i,valeur_fonction):
-    return abs(valeur_fonction-primitive(list_coef,borne_inf,borne_sup))
+def erreur(liste_coef,borne_inf,borne_sup,i,valeur_fonction):
+    return abs(valeur_fonction-primitive(liste_coef,borne_inf,borne_sup))
 
 def get_float_input(prompt):
     while True:
