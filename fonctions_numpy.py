@@ -1,6 +1,7 @@
 import numpy as np
 from fonctions import f
 
+
 def trapeze_numpy(list_coef, borne_inf, borne_sup, n):
     x = np.linspace(borne_inf, borne_sup, n + 1)
     y = f(list_coef, x)
@@ -40,4 +41,5 @@ def rectangle_numpy(list_coef, borne_inf, borne_sup, n):
     air = np.sum(y_milieux * largeur)
 
     return air
+
 
