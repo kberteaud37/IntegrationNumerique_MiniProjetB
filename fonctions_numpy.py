@@ -3,6 +3,7 @@ from fonctions import f
 
 
 def trapeze_numpy(list_coef, borne_inf, borne_sup, n):
+    #Création du x et du y, en fonction de l'intervalle donnée
     x = np.linspace(borne_inf, borne_sup, n + 1)
     y = f(list_coef, x)
 
@@ -30,16 +31,13 @@ def simpson_numpy(list_coef, borne_inf, borne_sup, n):
 
 
 def rectangle_numpy(list_coef, borne_inf, borne_sup, n):
-
-    air = 0
-
     largeur = (borne_sup - borne_inf) / n  # largeur de chaque rectangle
-
+    #Ajout des valeurs x et y pour chaque segment
     x_milieux = np.linspace(borne_inf + largeur / 2, borne_sup - largeur / 2, n)
     y_milieux = np.polyval(list_coef[::-1], x_milieux)
+    #Calcul de l'aire sous la courbe
+    aire = np.sum(y_milieux * largeur)
 
-    air = np.sum(y_milieux * largeur)
-
-    return air
+    return aire
 
 
