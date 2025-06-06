@@ -14,6 +14,7 @@ from fonctions_numpy import *
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from scipy import integrate
+import timeit
 
 print("Entrez les coefficients de la fonction f(x)")
 liste_coef = []
@@ -93,7 +94,7 @@ plt.xlabel("Nombre de segment")
 plt.ylabel("Aire sous la courbe")
 plt.grid(True)
 plt.legend()
-plt.title("Convergence l'aire obtenue en fonction du nombre de segment (Python)")
+plt.title("Convergence l'aire obtenue en fonction du nombre de segment (Numpy)")
 plt.show()
 
 plt.figure(3)
@@ -150,4 +151,73 @@ plt.ylabel("Aire sous la courbe")
 plt.grid(True)
 plt.legend()
 plt.title("Convergence de l'aire obtenue en fonction du nombre de segment")
+plt.show()
+
+
+#calcul des temps de calcul selon chaque méthode puis tracer du temps de calcul
+# de chaque méthode en fonction du nombre de segment n utiliser dans ses dernières
+n_values = list(range(20, 201)) #liste des données sur l'axe des x
+nombre_itération = 1000 #Nombre d'iteration pour une moyenne d'une donnée de temps de calcul
+
+
+times_rectangle = []
+times_rectangle_numpy = []
+
+times_trapeze = []
+times_trapeze_numpy = []
+times_trapeze_scipy = []
+
+times_simpson = []
+times_simpson_numpy = []
+times_simpson_scipy = []
+
+#calcul de chaque moyenne de chaque timeit sur chaque valeur de segment de 1 a 200
+for n in n_values:
+
+    t_rect = timeit.timeit(lambda: rectangle(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+    t_rect_np = timeit.timeit(lambda: rectangle_numpy(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+
+    t_trap = timeit.timeit(lambda: trapeze(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+    t_trap_np = timeit.timeit(lambda: trapeze_numpy(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+    t_scipy_trap = timeit.timeit(lambda: integrate.trapezoid(y, x=x), number=nombre_itération)/nombre_itération
+
+    t_simp = timeit.timeit(lambda: simpson(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+    t_simp_np = timeit.timeit(lambda: simpson_numpy(liste_coef, borne_inf, borne_sup, n), number=nombre_itération)/nombre_itération
+    t_scipy_simp = timeit.timeit(lambda: integrate.simpson(y, x=x), number=nombre_itération)/nombre_itération
+
+
+#transformation des temps de secondes en milli-secondes
+    times_rectangle.append(t_rect*1000)
+    times_rectangle_numpy.append(t_rect_np*1000)
+
+    times_trapeze.append(t_trap*1000)
+    times_trapeze_numpy.append(t_trap_np*1000)
+    times_trapeze_scipy.append(t_scipy_trap * 1000)
+
+    times_simpson.append(t_simp*1000)
+    times_simpson_numpy.append(t_simp_np*1000)
+    times_simpson_scipy.append(t_scipy_simp * 1000)
+
+#création du graphique
+plt.figure(7)
+
+plt.plot(n_values,times_rectangle, label="Méthode des Rectangle", color = "green")
+plt.plot(n_values,times_rectangle_numpy,label = "Méthode des Rectangle Numpy", color = "black")
+
+plt.plot(n_values, times_trapeze, label='Méthode des trapèzes', color='blue')
+plt.plot(n_values,times_trapeze_numpy,label='Méthode des trapèzes Numpy', color='red')
+plt.plot(n_values, times_trapeze_scipy, label="Méthode Trapèze SciPy", color='cyan')
+
+plt.plot(n_values, times_simpson, label='Méthode Simpson', color='yellow')
+plt.plot(n_values,times_simpson_numpy,label='Méthode Simpson Numpy', color='orange')
+plt.plot(n_values, times_simpson_scipy, label="Méthode Simpson SciPy", color='brown')
+
+
+
+plt.xlabel("Nombre de segments (n)")
+plt.ylabel("Temps de calcul (milli-secondes)")
+plt.title("Temps de calcul vs Nombre de segments ")
+plt.grid(True)
+plt.tight_layout()
+plt.legend()
 plt.show()
